@@ -1,6 +1,7 @@
 //Load Dependencies
 var userDal = require('../dal/user');
 var userProfileDal = require('../dal/user');
+var config = require('../config');
 
 
 /**
@@ -25,7 +26,7 @@ exports.createUser = function(req,res,next){
             debug('validate user');
             req.checkBody('password', 'Password Invalid')
             .notEmpty()
-            .isLength(5).withMessage('Password should be at least 8 characters long')
+            .isLength(config.security.PASSWORD_LENGTH).withMessage('Password should be at least 8 characters long')
             req.checkBody('email','Email Invalid')
             .notEmpty()
             .isEmail();
@@ -64,11 +65,49 @@ exports.createUser = function(req,res,next){
             });
         });
 
-       workflow.on('createUserProfile', function createUserProfile(){
+     /*  workflow.on('createUserProfile', function createUserProfile(){
            debug('createUserProfile');
            profileDal
            
-       }
+       }*/
 }
+
+exports.updateUser = function(req,res,next){
+    //to be implemented
+}
+
+exports.getUser  = function(req,res,next){
+    //to be implmented
+}
+
+exports.login = function(req,res,next){
+    //to be implemented
+}
+
+exports.logout = function(req,res,next){
+    //to be implemented
+}
+
+exports.close = function(req,res,next){
+    //to be implemented
+}
+
+exports.verifyEmail = function(req,res,next){
+    //to be implemented
+}
+
+exports.verifyPhone = function(req,res,next){
+    //to be implemented
+}
+
+exports.reset = function(req,res,next){
+    //to be implemented
+}
+
+exports.changePassword = function(req,res,next){
+    //to be implemented
+}
+
+
 
 

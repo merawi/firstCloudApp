@@ -1,5 +1,5 @@
 //Load Depenencies
-var userModel = require('../models.user');
+var userModel = require('../models/user');
 var debug = require('debug')('borsa : user_data_access')
 
 //Signup
