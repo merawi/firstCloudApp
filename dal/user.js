@@ -33,7 +33,7 @@ var debug = require('debug')('borsa:user_data_access')
 
  exports.getAll = function findAllUsers(query, callback){
     debug('finding all users...');
-    User.find(query, function(err,data)}
+    User.find(query, function(err,data){
         if(err) callback(err);
         callback(null, data);
       });
