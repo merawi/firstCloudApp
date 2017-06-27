@@ -1,6 +1,7 @@
 //Load Dependencies
 var userDal = require('../dal/user');
 var debug       = require('debug')('borsa:user_controller');
+var validator = require('express-validator');
 //var userProfileDal = require('../dal/user');
 
 /**
@@ -18,6 +19,10 @@ exports.signup = function(req,res,next){
         //debug('create user');
         var body = req.body;
             userDal.create(body, function callback(err,user){
+
+    //Data validation logic here.
+
+
                 if(err) debug(err);//return next(err);
                 res.status(200).json(user);
         });
