@@ -1,8 +1,7 @@
 //Load Dependencies
 var userDal = require('../dal/user');
-var userProfileDal = require('../dal/user');
-var config = require('../config');
-
+var debug       = require('debug')('borsa:user_controller');
+//var userProfileDal = require('../dal/user');
 
 /**
  * Lisence: MIT, Tony Mutai, Gebeya INC.
@@ -15,97 +14,26 @@ var config = require('../config');
  * 6. Respond
  */
 
-
-exports.createUser = function(req,res,next){
-        debug('create user');
-
-        var workflow = new events.EventEmitter();
+exports.signup = function(req,res,next){
+        //debug('create user');
         var body = req.body;
-
-        workflow.on('validateUser', function validateUser(){
-            debug('validate user');
-            req.checkBody('password', 'Password Invalid')
-            .notEmpty()
-            .isLength(config.security.PASSWORD_LENGTH).withMessage('Password should be at least 8 characters long')
-            req.checkBody('email','Email Invalid')
-            .notEmpty()
-            .isEmail();
-            req.checkBody('firstName', 'First name is required')
-            .notEmpty();
-            req.checkBody('middleName', 'Last name is required')
-            .notEmpty();     
-            req.checkBody('lastName', 'Last name is required')     
-            .notEmpty();
-
-            var validationErrors = req.validationERrors();
-            
-            if(validationErrors) {
-                res.status(400);
-                res.json(validationErrors);
-            }
-
-            workflow.emit('createUser');
-            
-        });
-
-        workflow.on('createUser', function createUser(){
-            debug('create user');
-
             userDal.create(body, function callback(err,user){
                 if(err) return next(err);
-
-                userDal.get({_Id:user._Id}, function(err, user){
-                    if(err) {
-                        debug(err);
-                        next(err);
-                    }
-                    res(200).json(user);
-                })
-                workflow.emit('createProfile', user);
-            });
+                res.status(200).json(user);
         });
+    }
+        
+//Implement here to create accessory objects for user
 
-     /*  workflow.on('createUserProfile', function createUserProfile(){
-           debug('createUserProfile');
-           profileDal
-           
-       }*/
+exports.welcome = function(req,res,next){
+    res.status(200).send('Welcome to user');
 }
 
-exports.updateUser = function(req,res,next){
-    //to be implemented
-}
-
-exports.getUser  = function(req,res,next){
-    //to be implmented
-}
-
-exports.login = function(req,res,next){
-    //to be implemented
-}
-
-exports.logout = function(req,res,next){
-    //to be implemented
-}
-
-exports.close = function(req,res,next){
-    //to be implemented
-}
-
-exports.verifyEmail = function(req,res,next){
-    //to be implemented
-}
-
-exports.verifyPhone = function(req,res,next){
-    //to be implemented
-}
-
-exports.reset = function(req,res,next){
-    //to be implemented
-}
-
-exports.changePassword = function(req,res,next){
-    //to be implemented
+exports.getAll = function(req,res,next){
+    userDal.getAll({}, function(err,userlist){
+        if(err) return next(err);
+        res.status(200).json(userlist);
+    });
 }
 
 

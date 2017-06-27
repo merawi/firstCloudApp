@@ -1,12 +1,14 @@
 //Load Depenencies
-var userModel = require('../models/user');
-var debug = require('debug')('borsa : user_data_access')
+var User = require('../models/user');
+var debug = require('debug')('borsa:user_data_access')
+//to activate debug logs, use: SET DEBUG=borsa* //on the command line before running the program
+
 
 //Signup
  exports.create  = function createUser(userData, callback){
-     var userModel = new userModel(userData);
+     var userModel = new User(userData);
      userModel.save(function(err,user){
-        debug('creating user');
+        debug('creating user...');
         if(err){
             return callback(err);
         }
@@ -23,21 +25,26 @@ var debug = require('debug')('borsa : user_data_access')
 
  exports.get = function findUser(query, callback){
      debug('Finding user...', query);
-     userModel.findOne(query, function(err, data){
+     User.findOne(query, function(err, data){
          if(err) callback(err);
          callback(null, data);
      });
  }
 
+ exports.getAll = function findAllUsers(query, callback){
+    debug('finding all users...');
+    User.find(query, function(err,data)}
+        if(err) callback(err);
+        callback(null, data);
+      });
+ }
+
  exports.delete = function deleteUser(query, callback){
-   userModel.findOne(query, function(err, user){
+   User.findOne(query, function(err, user){
        if(err) callback(err);
+       if(!user) callback(null, {});
           
-           if(err) callback(err);
-          
-           if(!user) callback(null, {});
-          
-           user.remove(function(err){
+       User.remove(function(err){
                if(err) {
                    return callback(err);
                }
@@ -46,6 +53,6 @@ var debug = require('debug')('borsa : user_data_access')
       })
  }
 
-
-
-
+ exports.update = function updateUser(query, data, callback){
+     
+     }
