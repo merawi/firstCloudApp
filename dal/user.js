@@ -10,7 +10,7 @@ var debug = require('debug')('borsa:user_data_access')
      userModel.save(function(err,user){
         debug('creating user...');
         if(err){
-            return callback(err);
+            return console.log(err);//callback(err);
         }
 
         exports.get({_id:user._id}, function(err,user){

@@ -1,7 +1,7 @@
 //Load Dependencies
 var mongoose  = require('mongoose');
 
-var user = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
 	email : {type : String},//use Id
 	phoneNo: {type:String},//Alternate user Id
 	password : {type : String},
@@ -12,6 +12,4 @@ var user = new mongoose.Schema({
 	lastModified: {type : Date, default : Date.now()}   
 });
 
-module.exports = { 
-	user : mongoose.model('UserLogin' , user)     
-}
+module.exports = mongoose.model('User' , userSchema)     

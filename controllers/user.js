@@ -18,7 +18,7 @@ exports.signup = function(req,res,next){
         //debug('create user');
         var body = req.body;
             userDal.create(body, function callback(err,user){
-                if(err) return next(err);
+                if(err) debug(err);//return next(err);
                 res.status(200).json(user);
         });
     }

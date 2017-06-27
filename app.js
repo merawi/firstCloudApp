@@ -38,11 +38,11 @@ app.get('/user/register', function(req, res, next){
 
 //Error handler middleware
 app.use(function(err,req,res,next){
-    res.status(500).send('Something went wrong. Please try again later!');
+    res.status(500).send(err);//'Something went wrong. Please try again later!');
 })
 
 //Server
 app.listen(config.PORT, function(err){
     if(err) console.log('Error starting server');
-    console.log(`listening to port: ${config.db.PORT}`);
+    console.log(`listening to port: ${config.PORT}`);
 });

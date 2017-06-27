@@ -7,6 +7,7 @@ module.exports =  {
     security : {
     	PASSWORD_LENGTH : 5
     },
+    
       PORT : '8888'
     
 }
