@@ -2,6 +2,7 @@
 var config 		= require('./config');
 var express 	= require('express');
 var debug 		= require('debug')('borsa-api');
+//use debug as: set DEBUG=borsa*
 //var routes 		= express.Router();
 var bodyParser 	= require('body-parser');
 var config 		= require('./config');
@@ -42,7 +43,7 @@ app.use(function(err,req,res,next){
 })
 
 //Server
-app.listen(config.PORT, function(err){
+app.listen(config.server.PORT, function(err){
     if(err) console.log('Error starting server');
-    console.log(`listening to port: ${config.PORT}`);
+    debug(`listening to port: ${config.server.PORT}`);
 });

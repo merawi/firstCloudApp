@@ -4,7 +4,7 @@ var debug = require('debug')('borsa:user_data_access')
 //to activate debug logs, use: SET DEBUG=borsa* //on the command line before running the program
 
 
-//Signup
+ //Signup
  exports.create  = function createUser(userData, callback){
      var userModel = new User(userData);
      userModel.save(function(err,user){
@@ -23,7 +23,8 @@ var debug = require('debug')('borsa:user_data_access')
      });
  }
 
- exports.get = function findUser(query, callback){
+ //find one user
+ exports.find = function findUser(query, callback){
      debug('Finding user...', query);
      User.findOne(query, function(err, data){
          if(err) callback(err);
@@ -31,6 +32,7 @@ var debug = require('debug')('borsa:user_data_access')
      });
  }
 
+  //find multiple users
  exports.getAll = function findAllUsers(query, callback){
     debug('finding all users...');
     User.find(query, function(err,data){
@@ -39,6 +41,7 @@ var debug = require('debug')('borsa:user_data_access')
       });
  }
 
+  //delete user
  exports.delete = function deleteUser(query, callback){
    User.findOne(query, function(err, user){
        if(err) callback(err);
@@ -50,9 +53,15 @@ var debug = require('debug')('borsa:user_data_access')
                }
            })
            callback(null, user);
-      })
+      });
  }
 
- exports.update = function updateUser(query, data, callback){
-     
-     }
+ exports.update = function(id, data, callback){
+     User.findByIdAndUpdate(id, data, function(error, user) {
+    // Handle the error using the Express error middleware
+    if(error) 
+    return callback(error);
+    callback({},user);
+    });
+    
+ } 
