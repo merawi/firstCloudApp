@@ -27,7 +27,7 @@ var debug = require('debug')('borsa:user_data_access')
  exports.find = function findUser(query, callback){
      debug('Finding user...', query);
      User.findOne(query, function(err, data){
-         if(err) callback(err);
+         if(err || !data) callback();
          callback(null, data);
      });
  }
@@ -56,8 +56,8 @@ var debug = require('debug')('borsa:user_data_access')
       });
  }
 
- exports.update = function(id, data, callback){
-     User.findByIdAndUpdate(id, data, function(error, user) {
+ exports.update = function(query, data, callback){
+     User.update(query, data, function(error, user) {
     // Handle the error using the Express error middleware
     if(error) 
     return callback(error);
