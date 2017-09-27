@@ -1,0 +1,37 @@
+{
+  "name": "borsa-api",
+  "version": "1.0.0",
+  "description": "payment gateway api",
+  "main": "app.js",
+  "scripts": {
+    "prestart" : "set debug=borsa*",
+    "start": "nodemon app.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.16.1",
+    "chai": "^3.5.0",
+    "express": "^4.14.1",
+    "express-unless": "^0.3.0",
+    "express-validator": "^3.1.2",
+    "gyp": "^0.5.0",
+    "moment": "^2.17.1",
+    "mongoose": "^4.8.3",
+    "nodemon": "^1.11.0",
+    "validator": "^7.0.0",
+    "xtend": "^4.0.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "borsa"
+  },
+  "keywords": [
+    "borsa"
+  ],
+  "author": "merawi",
+  "license": "MIT"
+}
